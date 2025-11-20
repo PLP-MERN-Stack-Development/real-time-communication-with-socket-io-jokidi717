@@ -1,77 +1,156 @@
-# Real-Time Chat Application with Socket.io
+Real-Time Chat Application (Socket.io + Express.js)
 
-This assignment focuses on building a real-time chat application using Socket.io, implementing bidirectional communication between clients and server.
+This project is a simple real-time chat application built using Node.js, Express.js, and Socket.io.
+It demonstrates the core concepts of real-time communication, including:
 
-## Assignment Overview
+Real-time messaging
 
-You will build a chat application with the following features:
-1. Real-time messaging using Socket.io
-2. User authentication and presence
-3. Multiple chat rooms or private messaging
-4. Real-time notifications
-5. Advanced features like typing indicators and read receipts
+Typing indicators
 
-## Project Structure
+User join/leave notifications
 
-```
-socketio-chat/
-├── client/                 # React front-end
-│   ├── public/             # Static files
-│   ├── src/                # React source code
-│   │   ├── components/     # UI components
-│   │   ├── context/        # React context providers
-│   │   ├── hooks/          # Custom React hooks
-│   │   ├── pages/          # Page components
-│   │   ├── socket/         # Socket.io client setup
-│   │   └── App.jsx         # Main application component
-│   └── package.json        # Client dependencies
-├── server/                 # Node.js back-end
-│   ├── config/             # Configuration files
-│   ├── controllers/        # Socket event handlers
-│   ├── models/             # Data models
-│   ├── socket/             # Socket.io server setup
-│   ├── utils/              # Utility functions
-│   ├── server.js           # Main server file
-│   └── package.json        # Server dependencies
-└── README.md               # Project documentation
-```
+Chat rooms (General, Sports, Tech)
 
-## Getting Started
+This project was created as part of the Real-Time Communication with Socket.io Assignment.
 
-1. Accept the GitHub Classroom assignment invitation
-2. Clone your personal repository that was created by GitHub Classroom
-3. Follow the setup instructions in the `Week5-Assignment.md` file
-4. Complete the tasks outlined in the assignment
+🚀 Features
+✅ Real-Time Messaging
 
-## Files Included
+Messages sent by one user appear instantly for all users in the same room.
 
-- `Week5-Assignment.md`: Detailed assignment instructions
-- Starter code for both client and server:
-  - Basic project structure
-  - Socket.io configuration templates
-  - Sample components for the chat interface
+✅ Chat Rooms
 
-## Requirements
+Users can switch between rooms (General, Sports, Tech).
 
-- Node.js (v18 or higher)
-- npm or yarn
-- Modern web browser
-- Basic understanding of React and Express
+✅ Typing Indicator
 
-## Submission
+A user sees when another user is typing.
 
-Your work will be automatically submitted when you push to your GitHub Classroom repository. Make sure to:
+✅ User Notifications
 
-1. Complete both the client and server portions of the application
-2. Implement the core chat functionality
-3. Add at least 3 advanced features
-4. Document your setup process and features in the README.md
-5. Include screenshots or GIFs of your working application
-6. Optional: Deploy your application and add the URLs to your README.md
+When a user joins or leaves the chat, other users receive a notification.
 
-## Resources
+✅ Username Prompt
 
-- [Socket.io Documentation](https://socket.io/docs/v4/)
-- [React Documentation](https://react.dev/)
-- [Express.js Documentation](https://expressjs.com/)
-- [Building a Chat Application with Socket.io](https://socket.io/get-started/chat) 
+Users enter their username when joining the chat.
+
+📂 Project Structure
+server/
+ ├── server.js
+ ├── package.json
+public/
+ ├── index.html
+
+🛠️ Technologies Used
+
+Node.js
+
+Express.js
+
+Socket.io
+
+HTML + JavaScript
+
+⚙️ Setup Instructions
+
+Follow these steps to run the project locally:
+
+1️⃣ Clone or Download the Repository
+git clone <your-repo-url>
+
+
+Or download the ZIP and extract it.
+
+2️⃣ Install Dependencies
+cd server
+npm install
+
+
+This installs:
+
+express
+
+socket.io
+
+dotenv
+
+nodemon (dev)
+
+3️⃣ Start the Server
+
+For production mode:
+
+npm start
+
+
+For development mode with auto-restart:
+
+npm run dev
+
+4️⃣ Open the App in Your Browser
+
+Go to:
+
+http://localhost:3000
+
+
+If you changed the PORT in .env, use your custom port.
+
+💬 How It Works
+User Joins
+
+User enters a username.
+
+Server broadcasts: "username has joined the chat".
+
+Sending Messages
+
+Messages are emitted to the correct room.
+
+Everyone sees the message instantly.
+
+Room Switching
+
+User selects a room.
+
+Socket leaves previous room and joins the new room.
+
+Typing
+
+When a user types, all others see username is typing....
+Sample Socket Events
+Client → Server
+
+joinRoom
+
+chatMessage
+
+typing
+
+Server → Client
+
+chatMessage
+
+notification
+
+typing
+
+📝 Environment Variables
+
+Create a .env file in the server folder:
+
+PORT=3000
+
+
+Defaults to 3000 if missing.
+
+🙌 Author
+
+Project completed by:
+JOY BLESSING OKIDI (jokidi717)
+As part of the Real-Time Communication with Socket.io Assignment.
+
+📄 License
+
+This project is for educational purposes only.
+

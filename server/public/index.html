@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Real-Time Chat App</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    #messages { list-style: none; padding: 0; }
+    #messages li { padding: 6px; border-bottom: 1px solid #eee; }
+  </style>
+</head>
+<body>
+
+  <h2>Real-Time Chat Application</h2>
+
+  <label>Choose Room:</label>
+  <select id="roomSelect">
+    <option value="general">General</option>
+    <option value="sports">Sports</option>
+    <option value="tech">Tech</option>
+  </select>
+
+  <p id="typing" style="color: gray;"></p>
+
+  <ul id="messages"></ul>
+
+  <input id="message" placeholder="Type a message..." autocomplete="off" />
+  <button id="send">Send</button>
+
+  <script src="/socket.io/socket.io.js"></script>
+
+  <script>
+    const username = prompt("Enter your username:");
+    const socket = io({ query: { username } });
+
+    const messagesList = document.getElementById("messages");
+    const messageInput = document.getElementById("message");
+    const sendBtn = document.getElementById("send");
+    const typing = document.getElementById("typing");
+    const roomSelect = document.getElementById("roomSelect");
+
+    // Join room
+    roomSelect.addEventListener("change", () => {
+      socket.emit("joinRoom", roomSelect.value);
+    });
+
+    // Send message
+    sendBtn.addEventListener("click", () => {
+      const msg = messageInput.value;
+      if (msg.trim() !== "") {
+        socket.emit("chatMessage", {
+          msg,
+          room: roomSelect.value
+        });
+        messageInput.value = "";
+      }
+    });
+
+    // Receive messages
+    socket.on("chatMessage", (data) => {
+      const li = document.createElement("li");
+      li.textContent = `${data.username}: ${data.msg}`;
+      messagesList.appendChild(li);
+    });
+
+    // Notifications
+    socket.on("notification", (text) => {
+      const li = document.createElement("li");
+      li.style.color = "gray";
+      li.textContent = text;
+      messagesList.appendChild(li);
+    });
+
+    // Typing indicator
+    messageInput.addEventListener("input", () => {
+      socket.emit("typing");
+    });
+
+    socket.on("typing", (text) => {
+      typing.innerText = text;
+      setTimeout(() => (typing.innerText = ""), 1200);
+    });
+  </script>
+
+</body>
+</html>
